@@ -16,16 +16,17 @@ RUN python setup.py install
 WORKDIR /tmp
 RUN git clone https://github.com/DenDen047/GENRE.git
 WORKDIR /tmp/GENRE
-RUN python setup.py install
-
-# pip
-WORKDIR /tmp
-COPY ../requirements.txt requirements.txt
 RUN pip install -r requirements.txt
+RUN python setup.py install
 
 # torch
 RUN pip install torchsummary
 RUN pip install torch_optimizer
+
+# pip
+WORKDIR /tmp
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
 # clearn
 RUN rm -rf /var/lib/apt/lists/*
